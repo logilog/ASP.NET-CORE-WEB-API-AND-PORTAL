@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Person Listeleme";
+}
+@model PersonViewModel
+@section PageStyles{
+}
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-2">
+                <h4 class="text-info"><i class="fas fa-list"></i> Person Liste</h4>
+            </div>
+            <div class="col-lg-10">
+                <a asp-controller="Person" asp-action="Ekleme" class="btn btn-info"><i class="fas fa-plus"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-12 card-body">
+            <table id="example" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>DOGUMYERI</th>
+                        <th>KIMLIK NO</th>
+                        <th>PID</th>
+                        <th>SOYAD</th>
+                        <th>ULKEUYRUK</th>
+                        <th>AD</th>
+                        <th></th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Success)
+                    {
+                        foreach (var PersonItem in Model.PersonListesi)
+                        {
+                    <tr>
+                        <td>@PersonItem.ID</td>
+                        <td>@PersonItem.DOGUMYERI</td>
+                        <td>@PersonItem.KIMLIKNO</td>
+                        <td>@PersonItem.PID</td>
+                        <td>@PersonItem.SOYAD</td>
+                        <td>@PersonItem.ULKEUYRUK</td>
+                        <td>@PersonItem.AD</td>
+
+
+
+                        <td>
+                            <a asp-controller="Person" asp-action="Guncelleme" asp-route-id="@PersonItem.ID" class="ml-1 btn btn-info"><i class="fa fa-edit"></i></a>
+                        </td>
+                    </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

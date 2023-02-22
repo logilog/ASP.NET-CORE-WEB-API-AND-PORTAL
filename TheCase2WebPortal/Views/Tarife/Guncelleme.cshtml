@@ -1,0 +1,43 @@
+﻿@model TarifeViewModel
+@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Tarife Güncelleme";
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-info"><i class="fas fa-plus"></i> Tarife Ekle</h4>
+        <div class="col-lg-12 card-body">
+            <form class="forms-sample" method="post" asp-controller="Tarife" asp-action="Guncelleme">
+                <div class="form-row">
+                    <div class="form-group col-lg-4">
+                        <label for="txtName">KISAAD</label>
+                        <input type="text" class="form-control" asp-for="Tarife.KISAAD" autocomplete="off" placeholder="KISAAD">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="txtPosition">TARIFENO</label>
+                        <input type="text" class="form-control" asp-for="Tarife.TARIFENO" autocomplete="off" placeholder="TARIFENO">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="txtOffice">UZUNAD</label>
+                        <input type="text" class="form-control" asp-for="Tarife.UZUNAD" autocomplete="off" placeholder="UZUNAD">
+                    </div>
+                    <input type="hidden" asp-for="Tarife.ID" />
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-12 pt-4">
+                        <button type="submit" class="btn btn-primary float-lg-right mr-2">Güncelle</button>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    @if (Model != null && !Model.Success)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @Model.Message
+                        </div>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="line"></div>

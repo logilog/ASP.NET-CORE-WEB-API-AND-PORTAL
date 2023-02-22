@@ -1,0 +1,176 @@
+﻿@{
+    Layout = "_LayoutBase";
+}
+@section Styles{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
+    <script src="Page.js"></script>
+    @await RenderSectionAsync("PageStyles", required: false)
+}
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <div class="text-center d-flex align-items-center justify-content-center">
+                <a class="brand-logo" href="index.html"><img src="~/images/menu/logo-white.svg" alt="logo"></a>
+                <a class="brand-logo-mini" href="index.html"><img src="~/images/menu/ts-icon.svg" alt="logo"></a>
+            </div>
+        </div>
+
+        <ul class="list-unstyled components">
+            <div class="user-profile">
+                <div class="user-image">
+                    <img src="~/images/profile/image0 (1).jpeg">
+                </div>
+                <div class="user-name">
+                    ALI BORA ANZERLIOGLU
+                </div>
+                <div class="user-designation">
+                    STAJYER
+                </div>
+            </div>
+            <li class="active">
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">Sözleşme</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a asp-controller="Sozlesme" asp-action="Liste">Liste</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Sozlesme" asp-action="Ekleme">Ekleme</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Sozlesme" asp-action="Guncelleme">Güncelleme</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#page1Submenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">Poliçe</a>
+                <ul class="collapse list-unstyled" id="page1Submenu">
+                    <li>
+                        <a asp-controller="Police" asp-action="Liste">Liste</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Police" asp-action="Ekleme">Ekleme</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Police" asp-action="Guncelleme">Güncelleme</a>
+                    </li>
+                </ul>
+            </li>
+            
+
+            <li>
+                <a href="#page2Submenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">Person</a>
+                <ul class="collapse list-unstyled" id="page2Submenu">
+                    <li>
+                        <a asp-controller="person" asp-action="Liste">Liste</a>
+                    </li>
+                    <li>
+                        <a asp-controller="person" asp-action="Ekleme">Ekleme</a>
+                    </li>
+                    <li>
+                        <a asp-controller="person" asp-action="Guncelleme">Güncelleme</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#page3Submenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">Sigortali</a>
+                <ul class="collapse list-unstyled" id="page3Submenu">
+                    <li>
+                        <a asp-controller="Sigortali" asp-action="Liste">Liste</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Sigortali" asp-action="Ekleme">Ekleme</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Sigortali" asp-action="Guncelleme">Güncelleme</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#page4Submenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">Tarife</a>
+                <ul class="collapse list-unstyled" id="page4Submenu">
+                    <li>
+                        <a asp-controller="Tarife" asp-action="Liste">Liste</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Tarife" asp-action="Ekleme">Ekleme</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Tarife" asp-action="Guncelleme">Güncelleme</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#page5Submenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">Zeyl</a>
+                <ul class="collapse list-unstyled" id="page5Submenu">
+                    <li>
+                        <a asp-controller="Zeyl" asp-action="Liste">Liste</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Zeyl" asp-action="Ekleme">Ekleme</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Zeyl" asp-action="Guncelleme">Güncelleme</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#page6Submenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">Zeyltips</a>
+                <ul class="collapse list-unstyled" id="page6Submenu">
+                    <li>
+                        <a asp-controller="Zeyltips" asp-action="Liste">Liste</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Zeyltips" asp-action="Ekleme">Ekleme</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Zeyltips" asp-action="Guncelleme">Güncelleme</a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                </button>
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Login" asp-action="LogOut"><i class="fas fa-power-off"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        @RenderBody()
+        @section Scripts{
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+            @await RenderSectionAsync("PageScripts", required: false)
+        }
+    </div>
+</div>

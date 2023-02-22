@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Poliçe Listeleme";
+}
+@model PoliceViewModel
+@section PageStyles{
+}
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-2">
+                <h4 class="text-info"><i class="fas fa-list"></i> Sözleşme Liste</h4>
+            </div>
+            <div class="col-lg-10">
+                <a asp-controller="Police" asp-action="Ekleme" class="btn btn-info"><i class="fas fa-plus"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-12 card-body">
+            <table id="example" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Poliçe</th>
+                        <th>Branş</th>
+                        <th>Son Zeyl No</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Success)
+                    {
+                        foreach (var PoliceItem in Model.PoliceListesi)
+                        {
+                            <tr>
+                                <td>@PoliceItem.ID</td>
+                                <td>@PoliceItem.POLID</td>
+                                <td>@PoliceItem.BRANSKOD</td>
+                                <td>@PoliceItem.SONZEYLNO</td>
+                                <td>
+                                    <a asp-controller="Police" asp-action="Guncelleme" asp-route-id="@PoliceItem.ID" class="ml-1 btn btn-info"><i class="fa fa-edit"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

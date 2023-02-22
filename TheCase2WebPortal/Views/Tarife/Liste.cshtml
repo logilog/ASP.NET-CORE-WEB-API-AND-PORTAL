@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Tarife Listeleme";
+}
+@model TarifeViewModel
+@section PageStyles{
+}
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-2">
+                <h4 class="text-info"><i class="fas fa-list"></i> Tarife Liste</h4>
+            </div>
+            <div class="col-lg-10">
+                <a asp-controller="Tarife" asp-action="Ekleme" class="btn btn-info"><i class="fas fa-plus"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-12 card-body">
+            <table id="example" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>KISAAD</th>
+                        <th>TARIFENO</th>
+                        <th>UZUNAD</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Success)
+                    {
+                        foreach (var TarifeItem in Model.TarifeListesi)
+                        {
+                            <tr>
+                                <td>@TarifeItem.ID</td>
+                                <td>@TarifeItem.KISAAD</td>
+                                <td>@TarifeItem.TARIFENO</td>
+                                <td>@TarifeItem.UZUNAD</td>
+                                <td>
+                                    <a asp-controller="Tarife" asp-action="Guncelleme" asp-route-id="@TarifeItem.ID" class="ml-1 btn btn-info"><i class="fa fa-edit"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

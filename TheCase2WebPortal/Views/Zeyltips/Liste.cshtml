@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Zeyltips Listeleme";
+}
+@model ZeyltipsViewModel
+@section PageStyles{
+}
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-2">
+                <h4 class="text-info"><i class="fas fa-list"></i> Zeyltips Liste</h4>
+            </div>
+            <div class="col-lg-10">
+                <a asp-controller="Zeyltips" asp-action="Ekleme" class="btn btn-info"><i class="fas fa-plus"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-12 card-body">
+            <table id="example" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Zeyltip</th>
+                        <th>Acıklama</th>
+                        
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Success)
+                    {
+                        foreach (var ZeyltipsItem in Model.ZeyltipsListesi)
+                        {
+                            <tr>
+                                <td>@ZeyltipsItem.ID</td>
+                                <td>@ZeyltipsItem.ACIKLAMA</td>
+                                <td>@ZeyltipsItem.ZEYLTIP</td>
+                                
+                                <td>
+                                    <a asp-controller="Zeyltips" asp-action="Guncelleme" asp-route-id="@ZeyltipsItem.ID" class="ml-1 btn btn-info"><i class="fa fa-edit"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

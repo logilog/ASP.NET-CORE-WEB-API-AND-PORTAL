@@ -1,0 +1,50 @@
+﻿@model SigortaliViewModel
+@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Sigortali Ekleme";
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-info"><i class="fas fa-plus"></i> Sigortali Ekle</h4>
+        <div class="col-lg-12 card-body">
+            <form class="forms-sample" method="post" asp-controller="sigortali" asp-action="Ekleme">
+                <div class="form-row">
+                    <div class="form-group col-lg-4">
+                        <label for="txtName">PID</label>
+                        <input type="text" class="form-control" asp-for="sigortali.PID" autocomplete="off" placeholder="PID">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="txtPosition">POLID</label>
+                        <input type="text" class="form-control" asp-for="sigortali.POLID" autocomplete="off" placeholder="POLID">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="txtOffice">SOYAD</label>
+                        <input type="text" class="form-control" asp-for="sigortali.SOYAD" autocomplete="off" placeholder="SOYAD">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="txtOffice">AD</label>
+                        <input type="text" class="form-control" asp-for="sigortali.AD" autocomplete="off" placeholder="AD">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="txtOffice">ZEYLNO</label>
+                        <input type="text" class="form-control" asp-for="sigortali.ZEYLNO" autocomplete="off" placeholder="ZEYLNO">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-12 pt-4">
+                        <button type="submit" class="btn btn-primary float-lg-right mr-2">Ekle</button>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    @if (Model != null && !Model.Success)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @Model.Message
+                        </div>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="line"></div>

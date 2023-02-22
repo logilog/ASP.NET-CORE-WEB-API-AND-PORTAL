@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Sigortali Listeleme";
+}
+@model SigortaliViewModel
+@section PageStyles{
+}
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-2">
+                <h4 class="text-info"><i class="fas fa-list"></i> Sigortali Liste</h4>
+            </div>
+            <div class="col-lg-10">
+                <a asp-controller="sigortali" asp-action="Ekleme" class="btn btn-info"><i class="fas fa-plus"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-12 card-body">
+            <table id="example" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>PID</th>
+                        <th>AD</th>
+                        <th>SOYAD</th>
+                        <th>ZEYLNO</th>
+                        <th>POLID</th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Success)
+                    {
+                        foreach (var sigortaliItem in Model.SigortaliListesi)
+                        {
+                    <tr>
+                        <td>@sigortaliItem.ID</td>
+                        <td>@sigortaliItem.PID</td>
+                        <td>@sigortaliItem.AD</td>
+                        <td>@sigortaliItem.SOYAD</td>
+                        <td>@sigortaliItem.ZEYLNO</td>
+                        <td>@sigortaliItem.POLID</td>
+
+
+                        <td>
+                            <a asp-controller="sigortali" asp-action="Guncelleme" asp-route-id="@sigortaliItem.ID" class="ml-1 btn btn-info"><i class="fa fa-edit"></i></a>
+                        </td>
+                    </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

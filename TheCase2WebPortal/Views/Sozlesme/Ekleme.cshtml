@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Sözleşme Ekleme";
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-info"><i class="fas fa-plus"></i> Söleşme Ekle</h4>
+        <div class="col-lg-12 card-body">
+            <form class="forms-sample" method="post" action="../Page/Page.html">
+                <div class="form-row">
+                    <div class="form-group col-lg-4">
+                        <label for="txtName">Name</label>
+                        <input type="text" class="form-control" id="txtName" autocomplete="off"
+                               placeholder="Name">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="txtPosition">Position</label>
+                        <input type="text" class="form-control" id="txtPosition" autocomplete="off"
+                               placeholder="Position">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="txtOffice">Office</label>
+                        <input type="text" class="form-control" id="txtOffice" autocomplete="off"
+                               placeholder="Office" name="Input.AnaAdi" value="">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-lg-4">
+                        <label for="txtAge">Age</label>
+                        <input type="text" class="form-control" id="txtAge" autocomplete="off"
+                               placeholder="Age">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="txtSalary">Salary</label>
+                        <input type="text" class="form-control" id="txtSalary" autocomplete="off"
+                               placeholder="Salary">
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label for="txtStartDate">Start Date</label>
+                        <input type="date" class="form-control" id="txtStartDate">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-lg-4">
+                        <label for="slcOptions">Options</label>
+                        <select class="form-control" id="slcOptions">
+                            <option value="" selected="">Seçiniz</option>
+                            <option value="K">Option1</option>
+                            <option value="E">Option2</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-8 pt-4">
+                        <button type="submit" class="btn btn-primary float-lg-right mr-2">Ekle</button>
+                    </div>
+                </div>
+                <div class="mt-3">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="line"></div>
