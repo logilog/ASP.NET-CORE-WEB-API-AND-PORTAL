@@ -1,0 +1,71 @@
+@model LiderlikViewModel
+@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Liderlik";
+}
+<div class="card">
+    <div class="card-body">
+        <div class="row align-items-center mb-3">
+            <div class="col">
+                <h4 class="text-warning mb-0"><i class="fas fa-trophy"></i> Liderlik Tablosu</h4>
+            </div>
+            <div class="col-auto">
+                <a asp-controller="Mac" asp-action="Liste" class="btn btn-outline-info btn-sm"><i class="fas fa-futbol"></i> Maçlar</a>
+            </div>
+        </div>
+
+        @if (Model != null && !Model.Success)
+        {
+            <div class="alert alert-warning">@Model.Message</div>
+        }
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th class="text-center">Sıra</th>
+                        <th>Kullanıcı</th>
+                        <th class="text-center">Toplam Puan</th>
+                        <th class="text-center">Tahmin</th>
+                        <th class="text-center">Tam Skor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.LiderlikListesi != null)
+                    {
+                        foreach (var l in Model.LiderlikListesi)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @if (l.SIRA == 1)
+                                    {
+                                        <span title="1." style="font-size:1.3rem;">🥇</span>
+                                    }
+                                    else if (l.SIRA == 2)
+                                    {
+                                        <span title="2." style="font-size:1.3rem;">🥈</span>
+                                    }
+                                    else if (l.SIRA == 3)
+                                    {
+                                        <span title="3." style="font-size:1.3rem;">🥉</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">@l.SIRA</span>
+                                    }
+                                </td>
+                                <td>
+                                    <span class="font-weight-bold">@(string.IsNullOrWhiteSpace(l.ADSOYAD) ? l.KULLANICIADI : l.ADSOYAD)</span>
+                                    <small class="text-muted d-block">@@@l.KULLANICIADI</small>
+                                </td>
+                                <td class="text-center"><span class="badge badge-pill badge-warning p-2">@l.TOPLAMPUAN</span></td>
+                                <td class="text-center">@l.TAHMINSAYISI</td>
+                                <td class="text-center">@l.TAMSKORSAYISI</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

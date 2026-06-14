@@ -59,7 +59,13 @@ namespace TheCase2WebPortal
             services.AddSingleton<IHttpClientFactoryService<List<Zeyltips>>, HttpClientFactoryService<List<Zeyltips>>>();
             services.AddSingleton<IHttpClientFactoryService<Zeyltips>, HttpClientFactoryService<Zeyltips>>();
 
-
+            // Dünya Kupası 2026 Skor Tahmin Ligi
+            services.AddSingleton<IHttpClientFactoryService<List<Mac>>, HttpClientFactoryService<List<Mac>>>();
+            services.AddSingleton<IHttpClientFactoryService<Mac>, HttpClientFactoryService<Mac>>();
+            services.AddSingleton<IHttpClientFactoryService<List<Tahmin>>, HttpClientFactoryService<List<Tahmin>>>();
+            services.AddSingleton<IHttpClientFactoryService<List<Liderlik>>, HttpClientFactoryService<List<Liderlik>>>();
+            services.AddSingleton<IHttpClientFactoryService<List<UyelikPaket>>, HttpClientFactoryService<List<UyelikPaket>>>();
+            services.AddSingleton<IHttpClientFactoryService<Uyelik>, HttpClientFactoryService<Uyelik>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

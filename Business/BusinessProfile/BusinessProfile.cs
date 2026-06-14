@@ -42,7 +42,30 @@ namespace Business.BusinessProfile
             CreateMap<ResultModel<Zeyltips>, MiddlewareResult<ZeyltipsDTO>>().ReverseMap();
             CreateMap<ResultModel<List<Zeyltips>>, MiddlewareResult<List<ZeyltipsDTO>>>().ReverseMap();
 
+            // ===== Dünya Kupası 2026 Skor Tahmin Ligi =====
+            CreateMap<Takim, TakimDTO>().ReverseMap();
+            CreateMap<ResultModel<Takim>, MiddlewareResult<TakimDTO>>().ReverseMap();
+            CreateMap<ResultModel<List<Takim>>, MiddlewareResult<List<TakimDTO>>>().ReverseMap();
 
+            CreateMap<Mac, MacDTO>().ReverseMap();
+            CreateMap<ResultModel<Mac>, MiddlewareResult<MacDTO>>().ReverseMap();
+            CreateMap<ResultModel<List<Mac>>, MiddlewareResult<List<MacDTO>>>().ReverseMap();
+
+            CreateMap<Tahmin, TahminDTO>().ReverseMap();
+            CreateMap<ResultModel<Tahmin>, MiddlewareResult<TahminDTO>>().ReverseMap();
+            CreateMap<ResultModel<List<Tahmin>>, MiddlewareResult<List<TahminDTO>>>().ReverseMap();
+
+            CreateMap<Liderlik, LiderlikDTO>().ReverseMap();
+            CreateMap<ResultModel<Liderlik>, MiddlewareResult<LiderlikDTO>>().ReverseMap();
+            CreateMap<ResultModel<List<Liderlik>>, MiddlewareResult<List<LiderlikDTO>>>().ReverseMap();
+
+            CreateMap<UyelikPaket, UyelikPaketDTO>().ReverseMap();
+            CreateMap<ResultModel<UyelikPaket>, MiddlewareResult<UyelikPaketDTO>>().ReverseMap();
+            CreateMap<ResultModel<List<UyelikPaket>>, MiddlewareResult<List<UyelikPaketDTO>>>().ReverseMap();
+
+            CreateMap<Uyelik, UyelikDTO>().ReverseMap();
+            CreateMap<ResultModel<Uyelik>, MiddlewareResult<UyelikDTO>>().ReverseMap();
+            CreateMap<ResultModel<List<Uyelik>>, MiddlewareResult<List<UyelikDTO>>>().ReverseMap();
 
         }
     }

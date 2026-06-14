@@ -50,7 +50,8 @@ namespace The_Case2.Controllers
                 {
                     new Claim(ClaimTypes.Name,Result.Data.AD),
                     new Claim(ClaimTypes.Surname,Result.Data.SOYAD),
-                    new Claim("UserName",Result.Data.KULLANICIADI)
+                    new Claim("UserName",Result.Data.KULLANICIADI),
+                    new Claim("UserId",Result.Data.ID?.ToString() ?? "0")
                 };
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);

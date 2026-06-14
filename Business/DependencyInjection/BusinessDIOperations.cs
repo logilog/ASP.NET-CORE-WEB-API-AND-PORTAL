@@ -21,6 +21,12 @@ namespace Business.DependencyInjection
             services.AddScoped<ITarifeService, TarifeService>();
             services.AddScoped<IZeylService, ZeylService>();
             services.AddScoped<IZeyltipsService, ZeyltipsService>();
+            // Dünya Kupası 2026 Skor Tahmin Ligi
+            services.AddScoped<ITakimService, TakimService>();
+            services.AddScoped<ITahminService, TahminService>();
+            services.AddScoped<IMacService, MacService>();
+            services.AddScoped<ILiderlikService, LiderlikService>();
+            services.AddScoped<IUyelikService, UyelikService>();
         }
     }
 }

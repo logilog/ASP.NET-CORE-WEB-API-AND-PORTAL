@@ -1,0 +1,77 @@
+@model MacViewModel
+@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Maçlar";
+}
+<div class="card">
+    <div class="card-body">
+        <div class="row align-items-center mb-3">
+            <div class="col">
+                <h4 class="text-info mb-0"><i class="fas fa-futbol"></i> Dünya Kupası 2026 — Fikstür</h4>
+            </div>
+            <div class="col-auto">
+                <a asp-controller="Liderlik" asp-action="Liste" class="btn btn-outline-warning btn-sm"><i class="fas fa-trophy"></i> Liderlik</a>
+                <a asp-controller="Tahmin" asp-action="Liste" class="btn btn-outline-info btn-sm"><i class="fas fa-clipboard-list"></i> Tahminlerim</a>
+                <a asp-controller="Uyelik" asp-action="Paketler" class="btn btn-warning btn-sm"><i class="fas fa-crown"></i> Premium</a>
+            </div>
+        </div>
+
+        @if (Model != null && !Model.Success)
+        {
+            <div class="alert alert-warning">@Model.Message</div>
+        }
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Tarih</th>
+                        <th>Grup</th>
+                        <th>Aşama</th>
+                        <th class="text-right">Ev Sahibi</th>
+                        <th class="text-center">Skor</th>
+                        <th>Deplasman</th>
+                        <th>Stadyum</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.MacListesi != null)
+                    {
+                        foreach (var m in Model.MacListesi)
+                        {
+                            <tr>
+                                <td><small>@(m.TARIH?.ToString("dd.MM.yyyy HH:mm"))</small></td>
+                                <td><span class="badge badge-secondary">@m.GRUP</span></td>
+                                <td><small>@m.ASAMA</small></td>
+                                <td class="text-right font-weight-bold">@m.EVSAHIBIBAYRAK @m.EVSAHIBIAD</td>
+                                <td class="text-center">
+                                    @if (m.DURUM == "BITTI")
+                                    {
+                                        <span class="badge badge-success">@m.EVSAHIBISKOR - @m.DEPLASMANSKOR</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-light">vs</span>
+                                    }
+                                </td>
+                                <td class="font-weight-bold">@m.DEPLASMANBAYRAK @m.DEPLASMANAD</td>
+                                <td><small class="text-muted">@m.STADYUM, @m.SEHIR</small></td>
+                                <td class="text-right">
+                                    @if (m.DURUM == "BITTI")
+                                    {
+                                        <span class="badge badge-success"><i class="fas fa-check"></i> Bitti</span>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Tahmin" asp-action="Tahminle" asp-route-id="@m.ID" class="btn btn-sm btn-info"><i class="fas fa-bullseye"></i> Tahmin Et</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

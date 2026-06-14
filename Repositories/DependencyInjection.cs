@@ -20,6 +20,12 @@ namespace Repositories
             services.AddScoped<ITarifeRepository, TarifeRepository>();
             services.AddScoped<IZeylRepository, ZeylRepository>();
             services.AddScoped<IZeyltipsRepository, ZeyltipsRepository>();
+            // Dünya Kupası 2026 Skor Tahmin Ligi
+            services.AddScoped<ITakimRepository, TakimRepository>();
+            services.AddScoped<IMacRepository, MacRepository>();
+            services.AddScoped<ITahminRepository, TahminRepository>();
+            services.AddScoped<ILiderlikRepository, LiderlikRepository>();
+            services.AddScoped<IUyelikRepository, UyelikRepository>();
         }
     }
 }

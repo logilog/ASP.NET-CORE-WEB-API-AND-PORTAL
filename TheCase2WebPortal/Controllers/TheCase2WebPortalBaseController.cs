@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using TheCase2WebPortal.Models;
 
 namespace TheCase2WebPortal.Controllers
@@ -21,5 +22,11 @@ namespace TheCase2WebPortal.Controllers
             _apiSettings = ApiSettings.Value;
             _jwtOptions = JwtOptions.Value;
         }
+
+        /// <summary>
+        /// Çerezde saklanan JWT'yi API çağrıları için Bearer Authorization başlığına dönüştürür.
+        /// </summary>
+        protected Dictionary<string, string> AuthHeader()
+            => new Dictionary<string, string>() { { "Authorization", $"Bearer {User.FindFirst("AuthToken")?.Value}" } };
     }
 }

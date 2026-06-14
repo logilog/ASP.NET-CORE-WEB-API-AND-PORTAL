@@ -1,0 +1,85 @@
+@model UyelikViewModel
+@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Premium Üyelik";
+    var aktifKod = Model != null && Model.AktifUyelik != null ? Model.AktifUyelik.PAKETKOD : null;
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-warning"><i class="fas fa-crown"></i> Premium Üyelik Paketleri</h4>
+        <p class="text-muted">Daha fazla özellik, özel ligler ve reklamsız deneyim için paketini seç.</p>
+
+        @if (!string.IsNullOrEmpty(Model?.Message))
+        {
+            <div class="alert alert-success">@Model.Message</div>
+        }
+
+        @if (!string.IsNullOrEmpty(aktifKod))
+        {
+            <div class="alert alert-info">
+                <i class="fas fa-check-circle"></i> Aktif paketiniz: <strong>@aktifKod</strong>
+                @if (Model.AktifUyelik.BITIS != null)
+                {
+                    <span>— Bitiş: @Model.AktifUyelik.BITIS.Value.ToString("dd.MM.yyyy")</span>
+                }
+            </div>
+        }
+
+        <div class="row mt-3">
+            @if (Model != null && Model.PaketListesi != null)
+            {
+                foreach (var p in Model.PaketListesi)
+                {
+                    var ucret = p.AYLIKUCRET ?? 0;
+                    var vurgulu = p.KOD == "PRO";
+                    var benimki = p.KOD == aktifKod;
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm @(vurgulu ? "border-warning" : "")">
+                            @if (vurgulu)
+                            {
+                                <div class="card-header bg-warning text-white text-center font-weight-bold"><i class="fas fa-star"></i> EN POPÜLER</div>
+                            }
+                            <div class="card-body d-flex flex-column text-center">
+                                <h5 class="card-title">@p.AD</h5>
+                                <span class="badge badge-pill @(vurgulu ? "badge-warning" : "badge-secondary") align-self-center mb-2">@p.KOD</span>
+                                <h2 class="my-2">
+                                    @if (ucret == 0)
+                                    {
+                                        <span class="text-success">Ücretsiz</span>
+                                    }
+                                    else
+                                    {
+                                        <span>₺@ucret.ToString("N0")<small class="text-muted" style="font-size:1rem;">/ay</small></span>
+                                    }
+                                </h2>
+                                <p class="text-muted">@p.ACIKLAMA</p>
+                                <ul class="list-unstyled text-left flex-grow-1">
+                                    @foreach (var ozellik in (p.OZELLIKLER ?? "").Split('|', System.StringSplitOptions.RemoveEmptyEntries))
+                                    {
+                                        <li class="mb-1"><i class="fas fa-check text-success"></i> @ozellik.Trim()</li>
+                                    }
+                                </ul>
+                                @if (benimki)
+                                {
+                                    <button class="btn btn-success btn-block" disabled><i class="fas fa-check"></i> Aktif Paketiniz</button>
+                                }
+                                else if (ucret == 0)
+                                {
+                                    <button class="btn btn-outline-secondary btn-block" disabled>Varsayılan</button>
+                                }
+                                else
+                                {
+                                    <form method="post" asp-controller="Uyelik" asp-action="SatinAl">
+                                        <input type="hidden" name="paketKod" value="@p.KOD" />
+                                        <button type="submit" class="btn @(vurgulu ? "btn-warning" : "btn-info") btn-block"><i class="fas fa-shopping-cart"></i> Satın Al</button>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <small class="text-muted"><i class="fas fa-lock"></i> Ödeme altyapısı (iyzico / Stripe) entegrasyonu için hazır; bu sürümde üyelik kaydı oluşturulur.</small>
+    </div>
+</div>

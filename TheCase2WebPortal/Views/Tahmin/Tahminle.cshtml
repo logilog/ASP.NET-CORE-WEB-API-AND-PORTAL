@@ -1,0 +1,54 @@
+@model TahminViewModel
+@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Tahmin Yap";
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-info"><i class="fas fa-bullseye"></i> Skor Tahmini</h4>
+
+        @if (Model != null && Model.Tahmin != null && Model.Tahmin.MACID != null)
+        {
+            <form method="post" asp-controller="Tahmin" asp-action="Tahminle">
+                <input type="hidden" asp-for="Tahmin.MACID" />
+                <input type="hidden" asp-for="Tahmin.EVSAHIBIAD" />
+                <input type="hidden" asp-for="Tahmin.DEPLASMANAD" />
+                <input type="hidden" asp-for="Tahmin.MACTARIHI" />
+
+                <div class="row justify-content-center align-items-end text-center mt-4">
+                    <div class="col-5 col-md-3">
+                        <h5 class="font-weight-bold">@Model.Tahmin.EVSAHIBIAD</h5>
+                        <input type="number" min="0" class="form-control form-control-lg text-center" asp-for="Tahmin.EVSAHIBISKOR" placeholder="0" />
+                    </div>
+                    <div class="col-2 col-md-1"><h3 class="mb-2 text-muted">:</h3></div>
+                    <div class="col-5 col-md-3">
+                        <h5 class="font-weight-bold">@Model.Tahmin.DEPLASMANAD</h5>
+                        <input type="number" min="0" class="form-control form-control-lg text-center" asp-for="Tahmin.DEPLASMANSKOR" placeholder="0" />
+                    </div>
+                </div>
+
+                <p class="text-center text-muted mt-3"><i class="far fa-clock"></i> @(Model.Tahmin.MACTARIHI?.ToString("dd.MM.yyyy HH:mm"))</p>
+
+                @if (!Model.Success && !string.IsNullOrEmpty(Model.Message))
+                {
+                    <div class="alert alert-danger text-center">@Model.Message</div>
+                }
+
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-info px-5"><i class="fas fa-save"></i> Tahmini Kaydet</button>
+                    <a asp-controller="Mac" asp-action="Liste" class="btn btn-light">Vazgeç</a>
+                </div>
+            </form>
+
+            <div class="alert alert-info mt-4 mb-0">
+                <strong><i class="fas fa-info-circle"></i> Puanlama:</strong>
+                Tam skor <b>5</b> puan &bull; Doğru sonuç + gol farkı <b>3</b> puan &bull; Doğru sonuç (galip/beraberlik) <b>2</b> puan &bull; Maç başladıktan sonra tahmin kapanır.
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning">Maç bulunamadı. @Model?.Message</div>
+            <a asp-controller="Mac" asp-action="Liste" class="btn btn-light">Fikstüre dön</a>
+        }
+    </div>
+</div>
