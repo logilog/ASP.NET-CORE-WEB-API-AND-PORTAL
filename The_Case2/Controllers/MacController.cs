@@ -53,5 +53,32 @@ namespace The_Case2.Controllers
         {
             return await _macService.SonucGir(mac);
         }
+        /// <summary>
+        /// Şu an oynanan (canlı) maçları döner.
+        /// </summary>
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<ResultModel<List<Mac>>> Canli()
+        {
+            return await _macService.Canli();
+        }
+        /// <summary>
+        /// Belirli bir günün (yyyy-MM-dd) maçlarını döner.
+        /// </summary>
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<ResultModel<List<Mac>>> Gunluk(string Tarih)
+        {
+            return await _macService.Gunluk(Tarih);
+        }
+        /// <summary>
+        /// Canlı skoru ve dakikayı günceller (maç durumunu OYNANIYOR yapar).
+        /// </summary>
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResultModel<object>> CanliGuncelle([FromBody] Mac mac)
+        {
+            return await _macService.CanliGuncelle(mac);
+        }
     }
 }

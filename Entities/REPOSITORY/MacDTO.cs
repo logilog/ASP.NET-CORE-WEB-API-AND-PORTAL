@@ -19,5 +19,6 @@ namespace Entities.REPOSITORY
         public int? EVSAHIBISKOR { get; set; }
         public int? DEPLASMANSKOR { get; set; }
         public string DURUM { get; set; }
+        public int? DAKIKA { get; set; }
     }
 }

@@ -26,6 +26,13 @@ namespace Repositories
             services.AddScoped<ITahminRepository, TahminRepository>();
             services.AddScoped<ILiderlikRepository, LiderlikRepository>();
             services.AddScoped<IUyelikRepository, UyelikRepository>();
+            // Maçkolik tarzı modüller
+            services.AddScoped<IPuanDurumuRepository, PuanDurumuRepository>();
+            services.AddScoped<IOyuncuRepository, OyuncuRepository>();
+            services.AddScoped<IGolRepository, GolRepository>();
+            services.AddScoped<IOranRepository, OranRepository>();
+            services.AddScoped<IHaberRepository, HaberRepository>();
+            services.AddScoped<IIstatistikRepository, IstatistikRepository>();
         }
     }
 }

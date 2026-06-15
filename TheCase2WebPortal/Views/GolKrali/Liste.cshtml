@@ -1,0 +1,40 @@
+@model GolKraliViewModel
+@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Gol Krallığı";
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-info"><i class="fas fa-futbol"></i> Gol Krallığı</h4>
+        @if (Model != null && !Model.Success)
+        {
+            <div class="alert alert-warning">@Model.Message</div>
+        }
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr><th class="text-center">#</th><th>Oyuncu</th><th>Takım</th><th class="text-center">Gol</th></tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.GolKraliListesi != null)
+                    {
+                        foreach (var k in Model.GolKraliListesi)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @if (k.SIRA == 1) { <span style="font-size:1.2rem;">🥇</span> }
+                                    else if (k.SIRA == 2) { <span style="font-size:1.2rem;">🥈</span> }
+                                    else if (k.SIRA == 3) { <span style="font-size:1.2rem;">🥉</span> }
+                                    else { <span class="text-muted">@k.SIRA</span> }
+                                </td>
+                                <td class="font-weight-bold">@k.OYUNCUAD</td>
+                                <td>@k.BAYRAK @k.TAKIMAD</td>
+                                <td class="text-center"><span class="badge badge-pill badge-info p-2">@k.GOLSAYISI</span></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

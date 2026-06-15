@@ -161,5 +161,58 @@ namespace Business
             }
             return Result;
         }
+        public async Task<ResultModel<List<Mac>>> Canli()
+        {
+            ResultModel<List<Mac>> Result = null;
+            try
+            {
+                MiddlewareResult<List<MacDTO>> dto = await _macRepository.GetCanli();
+                if (!dto.Success) _logger.LogWarning(dto.ServiceMessage);
+                Result = BusinessMapper.Mapper.Map<ResultModel<List<Mac>>>(dto);
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError($"Canli {ex.GetErrorDetail()}");
+                Result = new ResultModel<List<Mac>>(false, "Canlı maçlar alınırken hata oluştu.");
+            }
+            return Result;
+        }
+        public async Task<ResultModel<List<Mac>>> Gunluk(string tarih)
+        {
+            ResultModel<List<Mac>> Result = null;
+            try
+            {
+                MiddlewareResult<List<MacDTO>> dto = await _macRepository.GetByTarih(tarih);
+                if (!dto.Success) _logger.LogWarning(dto.ServiceMessage);
+                Result = BusinessMapper.Mapper.Map<ResultModel<List<Mac>>>(dto);
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError($"Gunluk {ex.GetErrorDetail()}");
+                Result = new ResultModel<List<Mac>>(false, "Günün maçları alınırken hata oluştu.");
+            }
+            return Result;
+        }
+        public async Task<ResultModel<object>> CanliGuncelle(Mac mac)
+        {
+            ResultModel<object> Result = null;
+            try
+            {
+                if (mac.ID == null || mac.EVSAHIBISKOR == null || mac.DEPLASMANSKOR == null)
+                {
+                    return new ResultModel<object>(false, "Maç ve skor bilgileri zorunludur.");
+                }
+                var dbEntity = BusinessMapper.Mapper.Map<MacDTO>(mac);
+                MiddlewareResult<object> dto = await _macRepository.CanliGuncelle(dbEntity);
+                if (!dto.Success) _logger.LogWarning(dto.ServiceMessage);
+                Result = BusinessMapper.Mapper.Map<ResultModel<object>>(dto);
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError($"CanliGuncelle {ex.GetErrorDetail()}");
+                Result = new ResultModel<object>(false, "Canlı skor güncellenirken hata oluştu.");
+            }
+            return Result;
+        }
     }
 }

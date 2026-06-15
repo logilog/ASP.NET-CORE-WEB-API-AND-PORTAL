@@ -67,6 +67,30 @@ namespace Business.BusinessProfile
             CreateMap<ResultModel<Uyelik>, MiddlewareResult<UyelikDTO>>().ReverseMap();
             CreateMap<ResultModel<List<Uyelik>>, MiddlewareResult<List<UyelikDTO>>>().ReverseMap();
 
+            // ===== Maçkolik tarzı modüller =====
+            CreateMap<PuanDurumu, PuanDurumuDTO>().ReverseMap();
+            CreateMap<ResultModel<List<PuanDurumu>>, MiddlewareResult<List<PuanDurumuDTO>>>().ReverseMap();
+
+            CreateMap<Oyuncu, OyuncuDTO>().ReverseMap();
+            CreateMap<ResultModel<Oyuncu>, MiddlewareResult<OyuncuDTO>>().ReverseMap();
+            CreateMap<ResultModel<List<Oyuncu>>, MiddlewareResult<List<OyuncuDTO>>>().ReverseMap();
+
+            CreateMap<Gol, GolDTO>().ReverseMap();
+            CreateMap<ResultModel<List<Gol>>, MiddlewareResult<List<GolDTO>>>().ReverseMap();
+
+            CreateMap<GolKrali, GolKraliDTO>().ReverseMap();
+            CreateMap<ResultModel<List<GolKrali>>, MiddlewareResult<List<GolKraliDTO>>>().ReverseMap();
+
+            CreateMap<Oran, OranDTO>().ReverseMap();
+            CreateMap<ResultModel<Oran>, MiddlewareResult<OranDTO>>().ReverseMap();
+
+            CreateMap<Haber, HaberDTO>().ReverseMap();
+            CreateMap<ResultModel<Haber>, MiddlewareResult<HaberDTO>>().ReverseMap();
+            CreateMap<ResultModel<List<Haber>>, MiddlewareResult<List<HaberDTO>>>().ReverseMap();
+
+            CreateMap<Istatistik, IstatistikDTO>().ReverseMap();
+            CreateMap<ResultModel<Istatistik>, MiddlewareResult<IstatistikDTO>>().ReverseMap();
+
         }
     }
     public static class BusinessMapper

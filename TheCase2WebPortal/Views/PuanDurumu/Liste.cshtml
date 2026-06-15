@@ -1,0 +1,52 @@
+@model PuanDurumuViewModel
+@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Puan Durumu";
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-info"><i class="fas fa-table"></i> Puan Durumu</h4>
+        @if (Model != null && !Model.Success)
+        {
+            <div class="alert alert-warning">@Model.Message</div>
+        }
+        @if (Model != null && Model.PuanDurumuListesi != null)
+        {
+            foreach (var grup in Model.PuanDurumuListesi.Select(x => x.GRUP).Distinct())
+            {
+                <h5 class="mt-4 mb-2 text-secondary">Grup @grup</h5>
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover align-middle mb-0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th><th>Takım</th>
+                                <th class="text-center">O</th><th class="text-center">G</th>
+                                <th class="text-center">B</th><th class="text-center">M</th>
+                                <th class="text-center">A</th><th class="text-center">Y</th>
+                                <th class="text-center">Av</th><th class="text-center">P</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var t in Model.PuanDurumuListesi.Where(x => x.GRUP == grup))
+                            {
+                                <tr class="@(t.SIRA <= 2 ? "table-success" : "")">
+                                    <td>@t.SIRA</td>
+                                    <td>@t.BAYRAK <a asp-controller="Takim" asp-action="Detay" asp-route-id="@t.TAKIMID">@t.TAKIMAD</a></td>
+                                    <td class="text-center">@t.OM</td>
+                                    <td class="text-center">@t.G</td>
+                                    <td class="text-center">@t.B</td>
+                                    <td class="text-center">@t.M</td>
+                                    <td class="text-center">@t.AG</td>
+                                    <td class="text-center">@t.YG</td>
+                                    <td class="text-center">@t.AVERAJ</td>
+                                    <td class="text-center font-weight-bold">@t.PUAN</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            <small class="text-muted d-block mt-3">Yeşil ile işaretli ilk 2 sıra bir üst tura yükselir. Sadece oynanmış maçlar hesaba katılır.</small>
+        }
+    </div>
+</div>

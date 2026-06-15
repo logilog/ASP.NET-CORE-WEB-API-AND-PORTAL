@@ -12,5 +12,8 @@ namespace Business.Interfaces
         Task<ResultModel<object>> Add(Mac mac);
         Task<ResultModel<object>> Update(Mac mac);
         Task<ResultModel<object>> SonucGir(Mac mac);
+        Task<ResultModel<List<Mac>>> Canli();
+        Task<ResultModel<List<Mac>>> Gunluk(string tarih);
+        Task<ResultModel<object>> CanliGuncelle(Mac mac);
     }
 }

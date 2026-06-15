@@ -1,0 +1,39 @@
+@model MacViewModel
+@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Canlı Skor";
+}
+<div class="card">
+    <div class="card-body">
+        <div class="row align-items-center mb-3">
+            <div class="col"><h4 class="text-danger mb-0"><i class="fas fa-circle text-danger"></i> Canlı Skor</h4></div>
+            <div class="col-auto">
+                <a asp-controller="Canli" asp-action="Program" class="btn btn-outline-info btn-sm"><i class="far fa-calendar"></i> Program</a>
+            </div>
+        </div>
+
+        @if (Model == null || Model.MacListesi == null || !Model.MacListesi.Any())
+        {
+            <div class="alert alert-secondary"><i class="far fa-clock"></i> Şu anda oynanan maç yok.</div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <tbody>
+                        @foreach (var m in Model.MacListesi)
+                        {
+                            <tr>
+                                <td><span class="badge badge-danger">@m.DAKIKA'</span></td>
+                                <td class="text-right font-weight-bold w-25">@m.EVSAHIBIBAYRAK @m.EVSAHIBIAD</td>
+                                <td class="text-center"><span class="badge badge-dark p-2" style="font-size:1rem;">@m.EVSAHIBISKOR - @m.DEPLASMANSKOR</span></td>
+                                <td class="font-weight-bold w-25">@m.DEPLASMANBAYRAK @m.DEPLASMANAD</td>
+                                <td class="text-right"><a asp-controller="Mac" asp-action="Detay" asp-route-id="@m.ID" class="btn btn-sm btn-outline-info">Detay</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

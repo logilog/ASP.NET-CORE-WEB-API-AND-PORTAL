@@ -66,6 +66,17 @@ namespace TheCase2WebPortal
             services.AddSingleton<IHttpClientFactoryService<List<Liderlik>>, HttpClientFactoryService<List<Liderlik>>>();
             services.AddSingleton<IHttpClientFactoryService<List<UyelikPaket>>, HttpClientFactoryService<List<UyelikPaket>>>();
             services.AddSingleton<IHttpClientFactoryService<Uyelik>, HttpClientFactoryService<Uyelik>>();
+
+            // Maçkolik tarzı modüller
+            services.AddSingleton<IHttpClientFactoryService<Takim>, HttpClientFactoryService<Takim>>();
+            services.AddSingleton<IHttpClientFactoryService<List<PuanDurumu>>, HttpClientFactoryService<List<PuanDurumu>>>();
+            services.AddSingleton<IHttpClientFactoryService<List<GolKrali>>, HttpClientFactoryService<List<GolKrali>>>();
+            services.AddSingleton<IHttpClientFactoryService<List<Gol>>, HttpClientFactoryService<List<Gol>>>();
+            services.AddSingleton<IHttpClientFactoryService<Oran>, HttpClientFactoryService<Oran>>();
+            services.AddSingleton<IHttpClientFactoryService<List<Haber>>, HttpClientFactoryService<List<Haber>>>();
+            services.AddSingleton<IHttpClientFactoryService<Haber>, HttpClientFactoryService<Haber>>();
+            services.AddSingleton<IHttpClientFactoryService<Istatistik>, HttpClientFactoryService<Istatistik>>();
+            services.AddSingleton<IHttpClientFactoryService<List<Oyuncu>>, HttpClientFactoryService<List<Oyuncu>>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

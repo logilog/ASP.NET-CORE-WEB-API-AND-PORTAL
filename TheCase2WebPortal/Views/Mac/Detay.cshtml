@@ -1,0 +1,98 @@
+@model MacDetayViewModel
+@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Maç Detayı";
+    var m = Model != null ? Model.Mac : null;
+}
+@if (m == null)
+{
+    <div class="card"><div class="card-body"><div class="alert alert-warning">Maç bulunamadı. @Model?.Message</div></div></div>
+}
+else
+{
+    <div class="card mb-3">
+        <div class="card-body text-center">
+            <small class="text-muted">@(m.TARIH?.ToString("dd.MM.yyyy HH:mm")) &bull; @m.STADYUM, @m.SEHIR &bull; @m.ASAMA - @m.GRUP Grubu</small>
+            <div class="row align-items-center mt-3">
+                <div class="col-5 text-right">
+                    <h4>@m.EVSAHIBIBAYRAK <a asp-controller="Takim" asp-action="Detay" asp-route-id="@m.EVSAHIBIID">@m.EVSAHIBIAD</a></h4>
+                </div>
+                <div class="col-2">
+                    @if (m.DURUM == "BEKLIYOR")
+                    {
+                        <h3 class="text-muted">vs</h3>
+                    }
+                    else
+                    {
+                        <h1 class="mb-0">@m.EVSAHIBISKOR - @m.DEPLASMANSKOR</h1>
+                        if (m.DURUM == "OYNANIYOR") { <span class="badge badge-danger">@m.DAKIKA'</span> }
+                        else { <span class="badge badge-success">Bitti</span> }
+                    }
+                </div>
+                <div class="col-5 text-left">
+                    <h4>@m.DEPLASMANBAYRAK <a asp-controller="Takim" asp-action="Detay" asp-route-id="@m.DEPLASMANID">@m.DEPLASMANAD</a></h4>
+                </div>
+            </div>
+            @if (m.DURUM != "BITTI")
+            {
+                <a asp-controller="Tahmin" asp-action="Tahminle" asp-route-id="@m.ID" class="btn btn-info mt-3"><i class="fas fa-bullseye"></i> Bu maça tahmin yap</a>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card h-100"><div class="card-body">
+                <h5 class="text-info"><i class="fas fa-futbol"></i> Goller</h5>
+                @if (Model.Goller == null || !Model.Goller.Any())
+                {
+                    <p class="text-muted mb-0">Henüz gol yok.</p>
+                }
+                else
+                {
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var g in Model.Goller)
+                        {
+                            <li class="mb-1">
+                                <span class="badge badge-secondary">@g.DAKIKA'</span>
+                                @g.BAYRAK <b>@g.OYUNCUAD</b>
+                                @if (g.PENALTI == true) { <span class="badge badge-warning">PEN</span> }
+                                <small class="text-muted">(@g.TAKIMAD)</small>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div></div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card h-100"><div class="card-body">
+                <h5 class="text-info"><i class="fas fa-percent"></i> İddaa Oranları</h5>
+                @if (Model.Oran == null)
+                {
+                    <p class="text-muted mb-0">Oran bulunmuyor.</p>
+                }
+                else
+                {
+                    <table class="table table-sm text-center mb-2">
+                        <thead><tr><th>MS 1</th><th>MS X</th><th>MS 2</th></tr></thead>
+                        <tbody><tr>
+                            <td><span class="badge badge-light p-2">@(Model.Oran.MS1?.ToString("0.00"))</span></td>
+                            <td><span class="badge badge-light p-2">@(Model.Oran.MSX?.ToString("0.00"))</span></td>
+                            <td><span class="badge badge-light p-2">@(Model.Oran.MS2?.ToString("0.00"))</span></td>
+                        </tr></tbody>
+                    </table>
+                    <table class="table table-sm text-center mb-0">
+                        <thead><tr><th>Alt 2.5</th><th>Üst 2.5</th><th>KG Var</th><th>KG Yok</th></tr></thead>
+                        <tbody><tr>
+                            <td>@(Model.Oran.ALT25?.ToString("0.00"))</td>
+                            <td>@(Model.Oran.UST25?.ToString("0.00"))</td>
+                            <td>@(Model.Oran.KGVAR?.ToString("0.00"))</td>
+                            <td>@(Model.Oran.KGYOK?.ToString("0.00"))</td>
+                        </tr></tbody>
+                    </table>
+                    <small class="text-muted">* Oranlar bilgilendirme amaçlıdır.</small>
+                }
+            </div></div>
+        </div>
+    </div>
+}

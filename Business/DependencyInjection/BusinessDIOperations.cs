@@ -27,6 +27,13 @@ namespace Business.DependencyInjection
             services.AddScoped<IMacService, MacService>();
             services.AddScoped<ILiderlikService, LiderlikService>();
             services.AddScoped<IUyelikService, UyelikService>();
+            // Maçkolik tarzı modüller
+            services.AddScoped<IPuanDurumuService, PuanDurumuService>();
+            services.AddScoped<IOyuncuService, OyuncuService>();
+            services.AddScoped<IGolService, GolService>();
+            services.AddScoped<IOranService, OranService>();
+            services.AddScoped<IHaberService, HaberService>();
+            services.AddScoped<IIstatistikService, IstatistikService>();
         }
     }
 }

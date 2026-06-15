@@ -12,5 +12,8 @@ namespace Repositories.Interfaces
         Task<MiddlewareResult<object>> Add(MacDTO macDTO);
         Task<MiddlewareResult<object>> Update(MacDTO macDTO);
         Task<MiddlewareResult<object>> SonucGuncelle(MacDTO macDTO);
+        Task<MiddlewareResult<List<MacDTO>>> GetCanli();
+        Task<MiddlewareResult<List<MacDTO>>> GetByTarih(string tarih);
+        Task<MiddlewareResult<object>> CanliGuncelle(MacDTO macDTO);
     }
 }

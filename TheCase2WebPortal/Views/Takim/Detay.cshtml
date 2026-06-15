@@ -1,0 +1,69 @@
+@model TakimDetayViewModel
+@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = Model != null && Model.Takim != null ? Model.Takim.AD : "Takım";
+    var t = Model != null ? Model.Takim : null;
+}
+@if (t == null)
+{
+    <div class="card"><div class="card-body"><div class="alert alert-warning">Takım bulunamadı. @Model?.Message</div></div></div>
+}
+else
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <h3 class="mb-1"><span style="font-size:2rem;">@t.BAYRAK</span> @t.AD</h3>
+            <span class="badge badge-secondary">Grup @t.GRUP</span>
+            <span class="badge badge-info">@t.KITA</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card h-100"><div class="card-body">
+                <h5 class="text-info"><i class="fas fa-users"></i> Kadro</h5>
+                @if (Model.Kadro == null || !Model.Kadro.Any())
+                {
+                    <p class="text-muted mb-0">Kadro bilgisi yok.</p>
+                }
+                else
+                {
+                    <table class="table table-sm table-hover mb-0">
+                        <thead><tr><th>#</th><th>Oyuncu</th><th>Mevki</th></tr></thead>
+                        <tbody>
+                            @foreach (var o in Model.Kadro)
+                            {
+                                <tr><td>@o.NUMARA</td><td>@o.AD</td><td><small class="text-muted">@o.MEVKI</small></td></tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div></div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card h-100"><div class="card-body">
+                <h5 class="text-info"><i class="fas fa-futbol"></i> Maçlar</h5>
+                @if (Model.Maclar == null || !Model.Maclar.Any())
+                {
+                    <p class="text-muted mb-0">Maç bulunamadı.</p>
+                }
+                else
+                {
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var mc in Model.Maclar)
+                        {
+                            <li class="mb-2 border-bottom pb-1">
+                                <small class="text-muted">@(mc.TARIH?.ToString("dd.MM HH:mm"))</small>
+                                <a asp-controller="Mac" asp-action="Detay" asp-route-id="@mc.ID">
+                                    @mc.EVSAHIBIAD
+                                    @if (mc.DURUM == "BEKLIYOR") { <span>-</span> } else { <b> @mc.EVSAHIBISKOR-@mc.DEPLASMANSKOR </b> }
+                                    @mc.DEPLASMANAD
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div></div>
+        </div>
+    </div>
+}

@@ -1,0 +1,48 @@
+@model MacViewModel
+@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "Günün Programı";
+    var tarih = ViewData["Tarih"] as string;
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-info"><i class="far fa-calendar"></i> Günün Programı</h4>
+        <form method="get" asp-controller="Canli" asp-action="Program" class="form-inline mb-3">
+            <input type="date" name="tarih" value="@tarih" class="form-control mr-2" />
+            <button type="submit" class="btn btn-info"><i class="fas fa-search"></i> Göster</button>
+        </form>
+
+        @if (Model == null || Model.MacListesi == null || !Model.MacListesi.Any())
+        {
+            <div class="alert alert-secondary">Bu tarihte maç bulunamadı.</div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead><tr><th>Saat</th><th class="text-right">Ev Sahibi</th><th class="text-center">Skor</th><th>Deplasman</th><th>Durum</th><th></th></tr></thead>
+                    <tbody>
+                        @foreach (var m in Model.MacListesi)
+                        {
+                            <tr>
+                                <td>@(m.TARIH?.ToString("HH:mm"))</td>
+                                <td class="text-right font-weight-bold">@m.EVSAHIBIBAYRAK @m.EVSAHIBIAD</td>
+                                <td class="text-center">
+                                    @if (m.DURUM == "BEKLIYOR") { <span class="badge badge-light">vs</span> }
+                                    else { <span class="badge badge-dark">@m.EVSAHIBISKOR - @m.DEPLASMANSKOR</span> }
+                                </td>
+                                <td class="font-weight-bold">@m.DEPLASMANBAYRAK @m.DEPLASMANAD</td>
+                                <td>
+                                    @if (m.DURUM == "OYNANIYOR") { <span class="badge badge-danger">@m.DAKIKA'</span> }
+                                    else if (m.DURUM == "BITTI") { <span class="badge badge-success">Bitti</span> }
+                                    else { <span class="badge badge-secondary">Bekliyor</span> }
+                                </td>
+                                <td class="text-right"><a asp-controller="Mac" asp-action="Detay" asp-route-id="@m.ID" class="btn btn-sm btn-outline-info">Detay</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

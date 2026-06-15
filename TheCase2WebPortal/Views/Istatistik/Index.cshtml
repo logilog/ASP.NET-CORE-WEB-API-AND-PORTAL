@@ -1,0 +1,60 @@
+@model IstatistikViewModel
+@{
+    Layout = "_LayoutPageBase";
+    ViewData["Title"] = "İstatistikler";
+    var i = Model != null ? Model.Istatistik : null;
+}
+<div class="card">
+    <div class="card-body">
+        <h4 class="text-info"><i class="fas fa-chart-simple"></i> Turnuva İstatistikleri</h4>
+        @if (i == null)
+        {
+            <div class="alert alert-warning">@Model?.Message</div>
+        }
+        else
+        {
+            <div class="row text-center mt-3">
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card bg-light h-100"><div class="card-body">
+                        <h2 class="text-info">@i.TOPLAMMAC</h2><small class="text-muted">Toplam Maç</small>
+                    </div></div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card bg-light h-100"><div class="card-body">
+                        <h2 class="text-success">@i.OYNANANMAC</h2><small class="text-muted">Oynanan Maç</small>
+                    </div></div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card bg-light h-100"><div class="card-body">
+                        <h2 class="text-danger">@i.TOPLAMGOL</h2><small class="text-muted">Toplam Gol</small>
+                    </div></div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card bg-light h-100"><div class="card-body">
+                        <h2 class="text-warning">@(i.MACBASIGOL?.ToString("0.00"))</h2><small class="text-muted">Maç Başı Gol</small>
+                    </div></div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card bg-light h-100"><div class="card-body">
+                        <h2 class="text-primary">@i.TOPLAMTAKIM</h2><small class="text-muted">Takım</small>
+                    </div></div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card bg-light h-100"><div class="card-body">
+                        <h2 class="text-primary">@i.TOPLAMOYUNCU</h2><small class="text-muted">Oyuncu</small>
+                    </div></div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card bg-light h-100"><div class="card-body">
+                        <h2 class="text-secondary">@i.TOPLAMTAHMIN</h2><small class="text-muted">Yapılan Tahmin</small>
+                    </div></div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="card bg-light h-100"><div class="card-body">
+                        <h5 class="text-success mt-2">@i.GOLKRALI</h5><small class="text-muted">Gol Kralı (@i.GOLKRALIGOL)</small>
+                    </div></div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

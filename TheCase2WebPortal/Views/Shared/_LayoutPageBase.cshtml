@@ -34,7 +34,25 @@
                    class="dropdown-toggle">⚽ Dünya Kupası 2026</a>
                 <ul class="collapse list-unstyled show" id="wc2026Submenu">
                     <li>
+                        <a asp-controller="Canli" asp-action="Index"><i class="fas fa-circle text-danger"></i> Canlı Skor</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Canli" asp-action="Program"><i class="far fa-calendar"></i> Program</a>
+                    </li>
+                    <li>
                         <a asp-controller="Mac" asp-action="Liste"><i class="fas fa-futbol"></i> Maçlar</a>
+                    </li>
+                    <li>
+                        <a asp-controller="PuanDurumu" asp-action="Liste"><i class="fas fa-table"></i> Puan Durumu</a>
+                    </li>
+                    <li>
+                        <a asp-controller="GolKrali" asp-action="Liste"><i class="fas fa-futbol"></i> Gol Krallığı</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Istatistik" asp-action="Index"><i class="fas fa-chart-simple"></i> İstatistikler</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Haber" asp-action="Liste"><i class="fas fa-newspaper"></i> Haberler</a>
                     </li>
                     <li>
                         <a asp-controller="Tahmin" asp-action="Liste"><i class="fas fa-clipboard-list"></i> Tahminlerim</a>

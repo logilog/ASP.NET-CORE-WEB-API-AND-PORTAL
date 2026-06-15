@@ -15,7 +15,7 @@ namespace Repositories
         private const string SelectBase =
             "SELECT m.ID, m.EVSAHIBIID, m.DEPLASMANID, e.AD AS EVSAHIBIAD, d.AD AS DEPLASMANAD, " +
             "e.BAYRAK AS EVSAHIBIBAYRAK, d.BAYRAK AS DEPLASMANBAYRAK, m.TARIH, m.GRUP, m.ASAMA, " +
-            "m.STADYUM, m.SEHIR, m.EVSAHIBISKOR, m.DEPLASMANSKOR, m.DURUM " +
+            "m.STADYUM, m.SEHIR, m.EVSAHIBISKOR, m.DEPLASMANSKOR, m.DURUM, m.DAKIKA " +
             "FROM MAC m JOIN TAKIM e ON e.ID = m.EVSAHIBIID JOIN TAKIM d ON d.ID = m.DEPLASMANID ";
 
         private readonly MySqlConnection _mySqlConnection;
@@ -171,6 +171,76 @@ namespace Repositories
                 {
                     await _mySqlConnection.CloseAsync();
                 }
+            }
+            return Result;
+        }
+        public async Task<MiddlewareResult<List<MacDTO>>> GetCanli()
+        {
+            MiddlewareResult<List<MacDTO>> Result = null;
+            try
+            {
+                using (var connection = _repositoryContext.CreateConnection())
+                {
+                    var DbResult = await connection.QueryAsync<MacDTO>(SelectBase + "WHERE m.DURUM='OYNANIYOR' ORDER BY m.TARIH;");
+                    Result = new MiddlewareResult<List<MacDTO>>(DbResult.ToList());
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Result = new MiddlewareResult<List<MacDTO>>(false, "Canlı maçlar alınmadı.", $"MacRepository GetCanli {ex.GetErrorDetail()}");
+            }
+            finally
+            {
+                if (_mySqlConnection.State == System.Data.ConnectionState.Open) await _mySqlConnection.CloseAsync();
+            }
+            return Result;
+        }
+        public async Task<MiddlewareResult<List<MacDTO>>> GetByTarih(string tarih)
+        {
+            MiddlewareResult<List<MacDTO>> Result = null;
+            try
+            {
+                using (var connection = _repositoryContext.CreateConnection())
+                {
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@TARIH", tarih);
+                    var DbResult = await connection.QueryAsync<MacDTO>(SelectBase + "WHERE DATE(m.TARIH)=@TARIH ORDER BY m.TARIH;", parameters);
+                    Result = new MiddlewareResult<List<MacDTO>>(DbResult.ToList());
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Result = new MiddlewareResult<List<MacDTO>>(false, "Günün maçları alınmadı.", $"MacRepository GetByTarih {ex.GetErrorDetail()}");
+            }
+            finally
+            {
+                if (_mySqlConnection.State == System.Data.ConnectionState.Open) await _mySqlConnection.CloseAsync();
+            }
+            return Result;
+        }
+        public async Task<MiddlewareResult<object>> CanliGuncelle(MacDTO macDTO)
+        {
+            MiddlewareResult<object> Result = null;
+            try
+            {
+                using (var connection = _repositoryContext.CreateConnection())
+                {
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@ID", macDTO.ID);
+                    parameters.Add("@EVSAHIBISKOR", macDTO.EVSAHIBISKOR);
+                    parameters.Add("@DEPLASMANSKOR", macDTO.DEPLASMANSKOR);
+                    parameters.Add("@DAKIKA", macDTO.DAKIKA);
+                    var DbResult = await connection.ExecuteAsync("UPDATE MAC SET EVSAHIBISKOR=@EVSAHIBISKOR,DEPLASMANSKOR=@DEPLASMANSKOR,DAKIKA=@DAKIKA,DURUM='OYNANIYOR' WHERE ID=@ID;", parameters);
+                    Result = new MiddlewareResult<object>(DbResult > 0, true);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Result = new MiddlewareResult<object>(false, "Canlı skor güncellenemedi.", $"MacRepository CanliGuncelle {ex.GetErrorDetail()}");
+            }
+            finally
+            {
+                if (_mySqlConnection.State == System.Data.ConnectionState.Open) await _mySqlConnection.CloseAsync();
             }
             return Result;
         }
